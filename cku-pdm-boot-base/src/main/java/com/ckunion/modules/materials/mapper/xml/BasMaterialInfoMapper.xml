@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.materials.mapper.BasMaterialInfoMapper">
+
+
+    <select id="getMaxCode"  resultType="java.util.Map">
+        select nvl(max(to_number( t.material_code) ),0) as MAXCODE  from bas_material_info t
+        where t.material_code != '自动生成' and t.typeoid = #{typeoid}
+	</select>
+
+
+</mapper>

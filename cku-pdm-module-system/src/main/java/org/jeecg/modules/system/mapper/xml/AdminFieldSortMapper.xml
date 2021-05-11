@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.AdminFieldSortMapper">
+
+    <select id="queryListHead" resultType="org.jeecg.modules.system.entity.AdminFieldSortVO">
+
+        SELECT
+        sort.id,sort.user_id,sort.is_hide,sort.field_id,main.is_search,main.is_add,sort.is_color,
+        style.style AS width,main.name,
+        main.field_name,main.input_type,main.menu_id,main.remark,main.input_tips,main.max_length,main.default_value,main.is_unique,main.is_null,
+        main.options,main.operating,main.examine_category_id,main.field_type,main.dic_code,main.relevant,main.dict_type,main.is_slot
+        FROM
+        admin_field_sort sort
+        left join admin_field main on main.id=sort.field_id
+        left JOIN ( select * from  admin_field_style where user_id = #{user_id} AND menu_id = #{menu_id}) style ON (main.field_name = style.field_name )
+        WHERE
+        sort.menu_id = #{menu_id}
+        and
+        sort.user_id = #{user_id}
+        order by sort is null asc,sort asc
+
+    </select>
+
+
+
+
+    <select id="queryAllListHead" resultType="org.jeecg.modules.system.entity.AdminFieldSortVO">
+
+        SELECT
+        sort.id,sort.user_id,sort.is_hide,sort.field_id,main.is_search,main.is_add,sort.is_color,
+        style.style,main.name,
+        main.field_name,main.input_type,main.menu_id,main.remark,main.input_tips,main.max_length,main.default_value,main.is_unique,main.is_null,
+        main.options,main.operating,main.examine_category_id,main.field_type,main.dic_code,main.relevant,main.dict_type,main.is_slot
+        FROM
+        admin_field_sort sort
+        left join admin_field main on main.id=sort.field_id
+        left join admin_field_style style on sort.menu_id=style.menu_id and sort.user_id=style.user_id
+
+
+    </select>
+
+
+
+
+</mapper>

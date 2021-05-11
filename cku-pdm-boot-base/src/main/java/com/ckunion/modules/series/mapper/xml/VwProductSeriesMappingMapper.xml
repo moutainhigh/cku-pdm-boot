@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.series.mapper.VwProductSeriesMappingMapper">
+    <select id="getSeriesMappingByTypeModelId" parameterType="java.lang.String" resultType="com.ckunion.modules.series.entity.VwProductSeriesMapping">
+		SELECT *
+		FROM  vw_product_series_mapping
+		WHERE
+			 type_model_id = #{typeModelId} and checked=1 order by series_order asc 	</select>
+</mapper>

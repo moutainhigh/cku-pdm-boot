@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.base.node.mapper.BasNodeTypeMapper">
+
+    <select id="getMaxTypeCode"  resultType="java.util.Map">
+        select nvl(max(to_number( t.node_code) ),0) as MAXCODE  from bas_node_type t
+        where t.node_code != '自动生成'
+	</select>
+
+</mapper>

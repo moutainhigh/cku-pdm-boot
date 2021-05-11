@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.base.doc.mapper.BasDocTypeMapper">
+
+    <select id="getMaxCode"  resultType="java.util.Map">
+        select substr((nvl(max(to_number( t.doc_code ) ),0)),${parentCodeLength}+1) as maxCode  from bas_doc_type t
+        where t.doc_code != '自动生成'
+        <if test="pid!=null and pid!=''">
+            and t.pid = #{pid}
+        </if>
+
+	</select>
+
+</mapper>

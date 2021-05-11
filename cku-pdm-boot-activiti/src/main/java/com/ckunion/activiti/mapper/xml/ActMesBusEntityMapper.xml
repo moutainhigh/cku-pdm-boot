@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.activiti.mapper.ActMesBusEntityMapper">
+	<select id="queryByProcInstIdAndBusinessKey" parameterType="java.lang.String" resultType="com.ckunion.activiti.entity.ActMesBusEntity">
+		select * from act_mes_bus where proc_inst_id=#{processInstanceId} and business_key=#{businessKey}
+	</select>
+	
+	<select id="queryActModelSql" parameterType="java.lang.String" resultType="java.util.Map">
+		${sql}
+	</select>
+</mapper>

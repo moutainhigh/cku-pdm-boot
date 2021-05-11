@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.series.mapper.ProdSeriesMapper">
+    <select id="getMaxSeriesNum"  resultType="java.lang.String">
+        select max(SERIAL_NUMBER) from Prod_Series i
+        where SERIAL_NUMBER is not null and i.SERIAL_NUMBER <![CDATA[ <> ]]> '自动生成' and
+        length(i.SERIAL_NUMBER) = 6 and  regexp_like(i.SERIAL_NUMBER,'.([^a-z]|[^A-Z])')
+    </select>
+</mapper>

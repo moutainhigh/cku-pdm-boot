@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.productbom.mapper.VwProProductBomMapper">
+
+    <select id="getAllVwBomListByParent" parameterType="String" resultType="com.ckunion.productbom.entity.VwProProductBom">
+          select * from vw_pro_product_bom vw
+          where vw.part_type in
+            <foreach item="key" collection="partType" open="(" separator="," close=")">
+                #{key}
+            </foreach>
+
+          start with vw.CHILDOID = #{parentId}  connect by prior vw.CHILDOID=vw.PARENTOID
+    </select>
+</mapper>

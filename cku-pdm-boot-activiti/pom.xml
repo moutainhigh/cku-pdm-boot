@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cku-pdm-boot-activiti</artifactId>
+
+    <parent>
+        <groupId>org.ckupdm.boot</groupId>
+        <artifactId>cku-pdm-parent</artifactId>
+        <version>2.4.2</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jeecgboot.version>2.4.2</jeecgboot.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.ckupdm.boot</groupId>
+            <artifactId>cku-pdm-base-core</artifactId>
+            <version>${jeecgboot.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- 工作流 start -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>6.0.0</version>
+            <!--<version>5.17.0</version>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>de.odysseus.juel</groupId>
+                    <artifactId>juel-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>de.odysseus.juel</groupId>
+                    <artifactId>juel-spi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.1</version>
+            <classifier>jdk15</classifier>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

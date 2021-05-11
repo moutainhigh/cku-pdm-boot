@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.ckupdm.boot</groupId>
+        <artifactId>cku-pdm-parent</artifactId>
+        <version>2.4.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>cku-pdm-starter</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>cku-pdm-starter-cloud</module>
+        <module>cku-pdm-starter-job</module>
+        <module>cku-pdm-starter-lock</module>
+        <module>cku-pdm-starter-rabbitmq</module>
+        <module>cku-pdm-starter-redis</module>
+    </modules>
+    <dependencies>
+        <!--jeecg-tools-->
+        <dependency>
+            <groupId>org.ckupdm.boot</groupId>
+            <artifactId>cku-pdm-base-tools</artifactId>
+        </dependency>
+        <!--加载配置信息-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.productbom.mapper.ProProductBomMapper">
+    <select id="getChildBomByParent" parameterType="String" resultType="com.ckunion.productbom.entity.ProProductBom">
+        SELECT b.* FROM pro_product_bom b left join pro_product_info i on b.childoid=i.id
+        where b.parentoid=#{parentoid}
+        and i.part_type in
+        <foreach item="key" collection="partType" open="(" separator="," close=")">
+            #{key}
+        </foreach>
+
+    </select>
+
+    <delete id="deleteBomByChildoid" parameterType="java.lang.String">
+		delete from pro_product_bom b where b.id in(
+          select id from pro_product_bom bom
+          start with bom.CHILDOID = #{childoid}  connect by prior bom.CHILDOID=bom.PARENTOID)
+    </delete>
+
+    <select id="getBomByChildoid" parameterType="String" resultType="com.ckunion.productbom.entity.ProProductBom">
+        SELECT * FROM pro_product_bom
+        where childoid=#{childoid}
+    </select>
+
+    <select id="getAllChildBomByParent" parameterType="String" resultType="com.ckunion.productbom.entity.ProProductBom">
+          select * from pro_product_bom bom
+          start with bom.CHILDOID = #{parentoid}  connect by prior bom.CHILDOID=bom.PARENTOID
+    </select>
+
+</mapper>

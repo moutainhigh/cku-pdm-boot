@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.base.proc.mapper.BasSdWorkprocMapper">
+
+
+
+    <select id="getMaxTypeCode"  resultType="java.util.Map">
+        select nvl(max(to_number( t.workproc_code) ),0) as MAXCODE  from bas_sd_workproc t
+        where t.workproc_code != '自动生成'
+	</select>
+
+</mapper>

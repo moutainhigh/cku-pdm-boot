@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.modules.base.type.mapper.BasTypeMapper">
+
+    <select id="getMaxCode" parameterType="java.util.HashMap"  resultType="java.util.Map">
+        select nvl(max(to_number( t.TYPE_CODE) ),0) as maxCode  from BAS_TYPE t
+        where t.TYPE_CODE != '自动生成' and TYPE_PID = #{pid}
+	</select>
+
+    <select id="getMaxCodeByTable" parameterType="java.util.HashMap"  resultType="java.util.Map">
+        select nvl(max(to_number( t.TYPE_CODE) ),0) as maxCode  from ${table} t
+        where t.TYPE_CODE != '自动生成'
+	</select>
+
+</mapper>

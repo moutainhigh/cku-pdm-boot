@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ckunion.productbom.mapper.ProProductInfoMapper">
+
+    <delete id="deleteInfoByBomChildoid" parameterType="java.lang.String">
+
+        delete from pro_product_info i where i.id in (
+          select bom.childoid from pro_product_bom bom
+          start with bom.CHILDOID = #{childoid}
+          connect by prior bom.CHILDOID=bom.PARENTOID
+        )
+
+    </delete>
+
+    <select id="getProductInfoByParentId" parameterType="String" resultType="com.ckunion.productbom.entity.ProProductInfo">
+          select * from pro_product_info info
+          where info.id in(
+          select bom.CHILDOID from pro_product_bom bom start with bom.CHILDOID = #{parentId}  connect by prior bom.CHILDOID=bom.PARENTOID
+          )
+    </select>
+
+
+    <update id="updateInfoStatusByArchived" parameterType="java.lang.String">
+        update pro_product_info i set i.status=#{status} where i.id in(
+          select bom.CHILDOID from pro_product_bom bom start with bom.CHILDOID = #{parentId}
+          connect by prior bom.CHILDOID=bom.PARENTOID
+        )
+	</update>
+
+
+    <select id="getProductInfoListBySignInoff" parameterType="String" resultType="com.ckunion.productbom.entity.ProProductInfo">
+          select * from pro_product_info info
+          where info.sign_inoff=#{inoff}
+          and info.id in(
+          select bom.CHILDOID from pro_product_bom bom start with bom.CHILDOID = #{parentId}  connect by prior bom.CHILDOID=bom.PARENTOID
+          )
+    </select>
+
+    <select id="getRootInfoByChildId" parameterType="String" resultType="com.ckunion.productbom.entity.ProProductInfo">
+          select * from pro_product_info i where i.id in(
+            select m.childoid from pro_product_bom m where m.is_root='Y'
+            start with m.childoid=#{childoid}
+            connect by prior m.parentoid=m.childoid
+          )
+    </select>
+
+
+</mapper>
